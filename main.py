@@ -242,6 +242,8 @@ def main():
             body += "</body></html>"
 
             posalji_email("Novi oglasi za vaše predmete", body, email)
+        else:
+            print(f"Nema novih oglasa za {email}.")
 
     # Čuvanje ažuriranih poslatih oglasa u fajl
     sacuvaj_poslate_oglasa(poslate_oglasa)
