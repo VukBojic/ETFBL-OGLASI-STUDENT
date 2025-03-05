@@ -228,17 +228,10 @@ def main():
         if novi_oglasi:
             print(f"Pronađeno {len(novi_oglasi)} novih oglasa za {email}!")
 
-            # Formatiranje i slanje emaila
+            # Formatiranje i slanje emaila sa samo novim oglasima
             body = "<html><body>"
-            for godina, oglasi in oglasi_po_godinama.items():
-                if oglasi:  # Ako postoje oglasi za ovu godinu
-                    body += f"<h2>Obaveštenja za {godina.replace('_', ' ').capitalize()}:</h2><br>"
-                    for oglas in oglasi:
-                        if normalizuj_oglas(oglas) in poslate_oglasa[email]:
-                            for predmet in predmeti_korisnika:
-                                if predmet in oglas:
-                                    body += formatiraj_oglas(oglas)
-                                    break
+            for oglas in novi_oglasi:
+                body += formatiraj_oglas(oglas)
             body += "</body></html>"
 
             posalji_email("Novi oglasi za vaše predmete", body, email)
